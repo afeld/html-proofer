@@ -104,8 +104,8 @@ module HTML
 
         file = File.join base, path
 
-        # implicit /index.html support, with support for tailing slashes
-        file = File.join path, "index.html" if File.directory? File.expand_path file, @check.src
+        # implicit /index.html support, with support for trailing slashes
+        file = File.join(file, "index.html") if File.directory?(File.absolute_path(file))
 
         file
       end
@@ -118,7 +118,7 @@ module HTML
 
       def absolute_path
         path = file_path || @check.path
-        File.expand_path path, Dir.pwd
+        File.absolute_path path
       end
     end
   end

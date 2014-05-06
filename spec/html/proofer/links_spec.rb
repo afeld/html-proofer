@@ -68,6 +68,12 @@ describe "Links tests" do
     output.should == ""
   end
 
+  it 'properly checks relative links for an absolute directory path' do
+    relativeLinks = "#{File.absolute_path(FIXTURES_DIR)}/relativeLinks.html"
+    output = capture_stderr { HTML::Proofer.new(relativeLinks).run }
+    output.should == ""
+  end
+
   it 'properly checks ssl links' do
     checkSSLLinks = "#{FIXTURES_DIR}/checkSSLLinks.html"
     output = capture_stderr { HTML::Proofer.new(checkSSLLinks).run }
